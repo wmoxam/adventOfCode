@@ -10,4 +10,6 @@ $stdin.read.each_line do |s|
 	cal += s.to_i
 end
 
+cals << cal
+
 puts cals.sort.last
