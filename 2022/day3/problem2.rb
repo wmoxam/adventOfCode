@@ -1,7 +1,5 @@
 score = 0
 
-items = ''
-
 def calc(c)
 	if c == c.upcase
 		c[0].ord - 38
