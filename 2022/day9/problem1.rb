@@ -11,66 +11,44 @@ $stdin.read.each_line do |s|
 		case direction
 		when 'R'
 			head[:x] += 1
-			if head == tail
-				head[:x] += 1
-			elsif head[:y] == tail[:y]
-				head[:x] += 1
-				tail[:x] += 1
-			elsif (head[:x] - tail[:x]).abs == 1 && (head[:y] - tail[:y]).abs == 1
-				head[:x] += 1
+
+			if (head[:y] - tail[:y]).abs == 1 && head[:x] - tail[:x] > 1
 				tail[:x] += 1
 				tail[:y] = head[:y]
-			else
-				head[:x] += 1
+			elsif head[:x] - tail[:x] > 1
 				tail[:x] += 1
 			end
 		when 'L'
-			if head == tail
-				head[:x] -= 1
-			elsif head[:y] == tail[:y]
-				head[:x] -= 1
-				tail[:x] -= 1
-			elsif (head[:x] - tail[:x]).abs == 1 && (head[:y] - tail[:y]).abs == 1
-				head[:x] -= 1
+			head[:x] -= 1
+
+			if (head[:y] - tail[:y]).abs == 1 && tail[:x] - head[:x] > 1
 				tail[:x] -= 1
 				tail[:y] = head[:y]
-			else
-				head[:x] -= 1
+			elsif tail[:x] - head[:x]  > 1
+				tail[:x] -= 1
 			end
 		when 'D'
-			if head == tail
-				head[:y] += 1
-			elsif head[:x] == tail[:x]
-				head[:y] += 1
-				tail[:y] += 1
-			elsif (head[:x] - tail[:x]).abs == 1 && (head[:y] - tail[:y]).abs == 1
-				head[:y] += 1
+			head[:y] += 1
+
+			if (head[:x] - tail[:x]).abs == 1 && head[:y] - tail[:y] > 1
 				tail[:y] += 1
 				tail[:x] = head[:x]
-			else
-				head[:y] += 1
+			elsif head[:y] - tail[:y] > 1
+				tail[:y] += 1
 			end
 		when 'U'
-			if head == tail
-				head[:y] -= 1
-			elsif head[:x] == tail[:x]
-				head[:y] -= 1
-				tail[:y] -= 1
-			elsif (head[:x] - tail[:x]).abs == 1 && (head[:y] - tail[:y]).abs == 1
-				head[:y] -= 1
+			head[:y] -= 1
+
+			if (head[:x] - tail[:x]).abs == 1 && tail[:y] - head[:y] > 1
 				tail[:y] -= 1
 				tail[:x] = head[:x]
-			else
-				head[:y] -= 1
+			elsif tail[:y] - head[:y] > 1
+				tail[:y] -= 1
 			end
 		end
 
-		puts "#{direction} : #{tail.inspect}"
-	
 		positions_visited << tail.dup
 	end
 end
-
-puts positions_visited.uniq.inspect
 
 puts positions_visited.uniq.length
