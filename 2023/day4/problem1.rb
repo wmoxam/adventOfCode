@@ -8,8 +8,6 @@ $stdin.read.each_line do |line|
 
 	winners = held & winning
 
-	puts winners.inspect
-
 	total += (1 * 2**(winners.length - 1)) if winners.length > 0
 end
 
