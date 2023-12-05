@@ -1,11 +1,11 @@
 seeds = []
-seed_to_soil = {}
-soil_to_fert = {}
-fert_to_water = {}
-water_to_light = {}
-light_to_temp = {}
-temp_to_humid = {}
-humid_to_loc = {}
+seed_to_soil = []
+soil_to_fert = []
+fert_to_water = []
+water_to_light = []
+light_to_temp = []
+temp_to_humid = []
+humid_to_loc = []
 
 type = nil
 
@@ -31,20 +31,28 @@ $stdin.read.each_line do |line|
 		next
 	else
 		dest_start, source_start, length = line.split(/\s/).map &:to_i
-		length.times do |i|
-			eval(type.to_s)[source_start + i] = dest_start + i
-		end
+		eval(type.to_s) << {min: source_start, max: source_start + length - 1, offset: dest_start - source_start}
 	end
 end
 
+def calc(maps, input)
+	maps.each do |map|
+		if input >= map[:min] && input <= map[:max]
+			return input + map[:offset]
+		end
+	end
+
+	input
+end
+
 locations = seeds.map do |seed|
-	soil = seed_to_soil[seed] || seed
-	fert = soil_to_fert[soil] || soil
-	water = fert_to_water[fert] || fert
-	light = water_to_light[water] || water
-	temp = light_to_temp[light] || light
-	humid = temp_to_humid[temp] || temp
-	humid_to_loc[humid] || humid
+	soil = calc(seed_to_soil, seed)
+	fert = calc(soil_to_fert, soil)
+	water = calc(fert_to_water, fert)
+	light = calc(water_to_light, water)
+	temp = calc(light_to_temp, light)
+	humid = calc(temp_to_humid, temp)
+	calc(humid_to_loc, humid)
 end
 
 puts locations.min
