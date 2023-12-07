@@ -60,7 +60,7 @@ $stdin.read.each_line do |line|
 	hands << Hand.new(cards, bid)
 end
 
-hands.sort! {|a,b| a <=> b }
+hands.sort!
 
 winnings = 0
 hands.each_with_index do |hand, i|
