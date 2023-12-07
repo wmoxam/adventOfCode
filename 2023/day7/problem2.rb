@@ -6,10 +6,6 @@ class Card
 		@symbol = symbol
 	end
 
-	def to_s
-		symbol
-	end
-
 	def >(other)
 		RANKS.index(symbol) < RANKS.index(other.symbol)
   end
@@ -46,46 +42,14 @@ class Hand
 		end
   end
 
-  def to_s
-  	"#{cards.join}, #{bid}, #{type_rank}"
-  end
-
   def type_rank
-  	return 7 if five_of_a_kind?
-  	return 6 if four_of_a_kind?
-  	return 5 if full_house?
-  	return 4 if three_of_a_kind?
-  	return 3 if two_pair?
-  	return 2 if pair?
+  	return 7 if group_lengths == [5]
+  	return 6 if group_lengths == [1, 4]
+  	return 5 if group_lengths == [2, 3]
+  	return 4 if group_lengths == [1, 1, 3]
+  	return 3 if group_lengths == [1, 2, 2]
+  	return 2 if group_lengths == [1, 1, 1, 2]
   	return 1
-  end
-
-  def five_of_a_kind?
-  	group_lengths == [5]
-  end
-
-  def four_of_a_kind?
-  	group_lengths == [1, 4]
-  end
-
-  def full_house?
-  	group_lengths == [2, 3]
-  end
-
-  def three_of_a_kind?
-  	group_lengths == [1, 1, 3]
-  end
-
-  def two_pair?
-  	group_lengths == [1, 2, 2]
-  end
-
-  def pair?
-  	group_lengths == [1, 1, 1, 2]
-  end
-
-  def high_card?
-  	group_lengths == [1, 1, 1, 1, 1]
   end
 
   def group_lengths
