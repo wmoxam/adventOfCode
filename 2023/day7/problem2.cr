@@ -1,5 +1,7 @@
 class Card
-  RANKS = %w(A K Q T 9 8 7 6 5 4 3 2 J)
+  RANKS = {"A" => 13, "K" => 12, "Q" => 11, "T" => 10, "9" => 9,
+    "8" => 8, "7" => 7, "6" => 6, "5" => 5, "4" => 4, "3" => 3,
+    "2" => 2, "J" => 1}
   property :symbol
 
   @symbol : String
@@ -8,8 +10,12 @@ class Card
     @symbol = symbol
   end
 
+  def to_s
+    symbol
+  end
+
   def >(other)
-    (RANKS.index(symbol) || 0) < (RANKS.index(other.symbol) || 0)
+    (RANKS[symbol] || 0) > (RANKS[other.symbol] || 0)
   end
 
   def ==(other)
@@ -30,6 +36,10 @@ class Hand
   def initialize(cards, bid)
     @cards = cards.split(//).map {|c| Card.new(c) }
     @bid = bid.to_i
+  end
+
+  def to_s
+    "#{cards.map &.to_s} : #{bid}"
   end
 
   def <=>(other)
@@ -82,6 +92,8 @@ STDIN.each_line do |line|
 end
 
 hands.sort!
+
+hands.each {|h| puts h.to_s}
 
 winnings = 0
 hands.each_with_index do |hand, i|

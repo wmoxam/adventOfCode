@@ -1,5 +1,7 @@
 class Card
-	RANKS = %w(A K Q T 9 8 7 6 5 4 3 2 J)
+	 RANKS = {"A" => 13, "K" => 12, "Q" => 11, "T" => 10, "9" => 9,
+    "8" => 8, "7" => 7, "6" => 6, "5" => 5, "4" => 4, "3" => 3,
+    "2" => 2, "J" => 1}
 	attr_reader :symbol
 
 	def initialize(symbol)
@@ -7,7 +9,7 @@ class Card
 	end
 
 	def >(other)
-		RANKS.index(symbol) < RANKS.index(other.symbol)
+		RANKS[symbol] > RANKS[other.symbol]
   end
 
   def ==(other)
