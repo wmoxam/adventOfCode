@@ -1,4 +1,3 @@
-require 'matrix'
 universe = []
 
 $stdin.read.each_line do |line|
