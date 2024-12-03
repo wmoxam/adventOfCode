@@ -24,4 +24,3 @@ $stdin.read.each_line do |report|
 end
 
 puts safe.size
-
