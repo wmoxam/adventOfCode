@@ -1,6 +1,6 @@
 safe = 0
 ARGF.gets_to_end.each_line do |report|
-  all_digits = report.split(/\s+/).map {|d| d.to_i }
+  all_digits = report.split(/\s+/).map(&.to_i)
 
   all_digits.combinations(all_digits.size - 1).each do |digits|
     next unless digits == digits.sort || digits == digits.sort.reverse
