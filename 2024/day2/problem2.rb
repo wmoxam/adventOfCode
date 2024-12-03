@@ -1,4 +1,4 @@
-safe = []
+safe = 0
 $stdin.read.each_line do |report|
   all_digits = report.split(/\s+/).map(&:to_i)
 
@@ -18,9 +18,9 @@ $stdin.read.each_line do |report|
 
     next unless ok
 
-    safe << report
+    safe += 1
     break
   end
 end
 
-puts safe.size
+puts safe
