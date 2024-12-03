@@ -1,7 +1,7 @@
 total = 0
 enabled = true
 $stdin.read.each_line do |line|
-  matches = line.scan(/((mul\(\d\d?\d?,\d\d?\d?\)|(do\(\))|(don't\(\))))/)
+  matches = line.scan(/((mul\(\d{1,3},\d{1,3}\)|(do(n't)?\(\))))/)
   matches.each do |match|
     case match[0]
     when "do()"
