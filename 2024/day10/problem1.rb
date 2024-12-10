@@ -22,8 +22,7 @@ def visit(elevation, x, y)
 end
 
 def trailhead_score(x, y)
-  coords = visit(0, x, y).uniq.reject {|b| b.empty? }
-  coords.length
+  visit(0, x, y).uniq.length
 end
 
 score = 0
