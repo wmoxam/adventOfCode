@@ -29,10 +29,7 @@ score = 0
 
 @map.each_with_index do |row, y|
   row.each.with_index do |c, x|
-    if c == 0
-      s = trailhead_score(x, y)
-      score += s
-    end
+    score += trailhead_score(x, y) if c == 0
   end
 end
 
